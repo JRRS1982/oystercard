@@ -10,7 +10,13 @@ require './lib/Oystercard.rb'
 # balance2 = card.balance
 # balance2 - balance1 == 100
 
-# Step06
+# # Step06
+# card = Oystercard.new
+# card.top_up(90)
+# p card.top_up(1) ==  "Unsuccessful. You have the maximum allowed amount on your card."
+
+# Step07
 card = Oystercard.new
 card.top_up(90)
-p card.top_up(1) ==  "Unsuccessful. You have the maximum allowed amount on your card."
+card.deduct(10)
+p card.balance == 80

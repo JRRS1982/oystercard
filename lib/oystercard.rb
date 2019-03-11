@@ -11,6 +11,10 @@ class Oystercard
     @balance += amount
   end
 
+  def deduct(amount)
+    @balance -= amount
+  end
+
   private
   def max_reached_message
     "Unsuccessful. You have the maximum allowed amount on your card."

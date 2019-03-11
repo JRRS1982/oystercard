@@ -21,4 +21,10 @@ describe Oystercard do
 
   end
 
+  it 'able to deduct from balance' do
+    subject.top_up(90)
+    subject.deduct(10)
+    expect(subject.balance).to eq 80
+  end
+
 end
