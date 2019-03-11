@@ -32,6 +32,7 @@ describe Oystercard do
   end
 
   it "changes journey status with a touch_in" do
+    subject.top_up(90)
     subject.touch_in
     expect(subject).to be_in_journey
   end
@@ -40,6 +41,12 @@ describe Oystercard do
     allow subject.in_journey = true
     subject.touch_out
     expect(subject).not_to be_in_journey
+  end
+
+  it 'raises an error when we touch_in with less than $1' do
+    expect {subject.touch_in}.to raise_error{
+      "Sorry, your balance is too low to start this journey."
+    }
   end
 
 end

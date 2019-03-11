@@ -30,7 +30,11 @@ require './lib/Oystercard.rb'
 # card.touch_in
 # card.in_journey == true
 
-# Step08c
+# # Step08c
+# card = Oystercard.new
+# card.touch_out
+# card.in_journey == false
+
+# Step09
 card = Oystercard.new
-card.touch_out
-card.in_journey == false
+p card.touch_in == "Sorry, your balance is too low to start this journey."
