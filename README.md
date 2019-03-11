@@ -45,12 +45,12 @@ Plan5b: Change user's commuting status when they touch in.
 
 Plan5c: Change user's commuting status when they touch out.
 
-Plan6:  If a user tries to start a journey with less than £1 then an error will 
+Plan6:  If a user tries to start a journey with less than £1 then an error will
         be raised.
 
 
 
 
-|CLASSES|METHODS, VARIABLES, CONSTANTS|
-|---------|-----------------------------|
-|card|@balance, top_up, deduct, @in_journey, in_journey?,@in_journey, in_journey?, touch_in, touch_out,  REQUIRED_BALANCE|
+|CLASSES|METHODS|VARIABLES|CONSTANTS|
+|---------|--------------|--------------|--------------|
+|card|top_up, deduct, in_journey?, in_journey?, touch_in, touch_out|@balance, @in_journey|REQUIRED_BALANCE|
