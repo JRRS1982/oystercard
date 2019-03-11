@@ -42,7 +42,7 @@ class Oystercard
   end
 
   def min_balance_message
-    "Sorry, your balance is too low to start this journey." 
+    "Sorry, your balance is too low to start this journey."
   end
 
 end
