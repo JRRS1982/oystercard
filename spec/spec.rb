@@ -3,9 +3,14 @@ require './lib/Oystercard.rb'
 # card = Oystercard.new
 # card.balance # returns value
 
-# Step05
+# # Step05
+# card = Oystercard.new
+# balance1 = card.balance
+# card.top_up(100)
+# balance2 = card.balance
+# balance2 - balance1 == 100
+
+# Step06
 card = Oystercard.new
-balance1 = card.balance
-card.top_up(100)
-balance2 = card.balance
-balance2 - balance1 == 100
+card.top_up(90)
+p card.top_up(1) ==  "Unsuccessful. You have the maximum allowed amount on your card."
