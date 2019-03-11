@@ -15,8 +15,22 @@ require './lib/Oystercard.rb'
 # card.top_up(90)
 # p card.top_up(1) ==  "Unsuccessful. You have the maximum allowed amount on your card."
 
-# Step07
+# # Step07
+# card = Oystercard.new
+# card.top_up(90)
+# card.deduct(10)
+# p card.balance == 80
+
+# # Step08a
+# card = Oystercard.new
+# p card.in_journey? == false
+
+# # Step08b
+# card = Oystercard.new
+# card.touch_in
+# card.in_journey == true
+
+# Step08c
 card = Oystercard.new
-card.top_up(90)
-card.deduct(10)
-p card.balance == 80
+card.touch_out
+card.in_journey == false
