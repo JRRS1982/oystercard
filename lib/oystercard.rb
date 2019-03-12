@@ -4,6 +4,7 @@ class Oystercard
   attr_accessor :in_journey
 
   REQUIRED_BALANCE = 1
+  MINIMUM_FARE = 2
 
   def initialize
     @balance = 0
@@ -12,11 +13,8 @@ class Oystercard
 
   def top_up(amount)
     raise max_reached_message if max_reached(amount)
-    @balance += amount
-  end
 
-  def deduct(amount)
-    @balance -= amount
+    @balance += amount
   end
 
   def in_journey?
@@ -25,14 +23,21 @@ class Oystercard
 
   def touch_in
     raise min_balance_message if @balance < REQUIRED_BALANCE
+
     @in_journey = true
   end
 
   def touch_out
     @in_journey = false
+    deduct(MINIMUM_FARE)
   end
 
   private
+
+  def deduct(amount)
+    @balance -= amount
+  end
+
   def max_reached_message
     "Unsuccessful. You have the maximum allowed amount on your card."
   end
