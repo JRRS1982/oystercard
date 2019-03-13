@@ -90,5 +90,13 @@ describe Oystercard do
     it "returns an empty array at first" do
       expect(subject.journeys).to eq []
     end
+
+    it "returns an empty array at first" do  
+      subject.top_up(10)
+      subject.touch_in('Harringay')
+      subject.touch_out('Liverpool Street')  
+      expect(subject.journeys.count).to eq 1
+    end
+
   end
 end

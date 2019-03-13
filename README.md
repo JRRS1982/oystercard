@@ -28,7 +28,6 @@ I need to have the minimum amount (£1) for a single journey.
 
 ### Which we can break down as follows:
 
-
 Plan1:  User will check balance and balance will be returned.
 
 Plan2:  User will top-up by a certain amount and the balance will change by that
@@ -47,8 +46,6 @@ Plan5c: Change user's commuting status when they touch out.
 
 Plan6:  If a user tries to start a journey with less than £1 then an error will
         be raised.
-
-
 
 
 |CLASSES|METHODS|VARIABLES|CONSTANTS|
