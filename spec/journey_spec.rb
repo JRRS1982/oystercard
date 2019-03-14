@@ -1,6 +1,7 @@
-require 'journey'
+require './lib/journey'
 
 describe Journey do
+<<<<<<< HEAD
   it 'checks for journey class' do
   end
 
@@ -22,3 +23,21 @@ end
 #     expect(subject.journeys[-1][:entry]).to eq @entry_station
 #   end
 # end
+=======
+  let(:station) { double :station, zone: 2 }
+  let(:station2) { double :station2, zone: 3 }
+  subject { described_class.new(station) } 
+
+  context '#entry station' do
+    it 'records an entry station' do
+      expect(subject.entry_station).to eq station
+    end
+  end
+
+  context '#exit station' do
+    it 'finish receives the exit station' do
+      expect(subject.finish(station2)).to eq station2
+    end
+  end
+end
+>>>>>>> 14th-march-ch14
