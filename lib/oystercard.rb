@@ -1,10 +1,10 @@
+require './lib/journey.rb'
+
 class Oystercard
 
-  attr_reader :balance,  :journeys
-  # attr_reader :entry_station,
+  attr_reader :balance, :journeys
 
   REQUIRED_BALANCE = 1
-  MINIMUM_FARE = 2
 
   def initialize
     @balance = 0
@@ -17,26 +17,20 @@ class Oystercard
     @balance += amount
   end
 
-  def in_journey?
-    if @journeys.empty? 
-      return false
-    elsif @journeys[-1][:exit] == nil
-      return true
-    else 
-      false
-    end
-  end
-
   def touch_in(entry_station)
     raise min_balance_message if @balance < REQUIRED_BALANCE
   
-    @journeys << {:entry => entry_station}
+    @journeys << { :entry => entry_station }
   end
 
   def touch_out(exit_station)
-    # @entry_station = nil
     @journeys[-1][:exit] = exit_station
+
     deduct(MINIMUM_FARE)
+  end
+
+  def in_journey?
+    return true if @entry_station
   end
 
   private
