@@ -25,9 +25,6 @@ describe Oystercard do
     end
   end
   
-<<<<<<< HEAD
-
-=======
   describe '#touch_in' do
     it 'changes journey status' do
       subject.top_up(90)
@@ -45,7 +42,6 @@ describe Oystercard do
       expect(subject.journeys[-1][:entry]).to eq @entry_station
     end
   end
->>>>>>> 14th-march-ch14
 
   describe '#touch_out' do
     before :each do

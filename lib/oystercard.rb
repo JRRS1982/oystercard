@@ -1,18 +1,11 @@
-<<<<<<< HEAD
 require_relative 'station'
-=======
 require './lib/journey.rb'
->>>>>>> 14th-march-ch14
 
 class Oystercard
 
   attr_reader :balance, :journeys
 
-<<<<<<< HEAD
-  MINIMUM_FARE = 2
-=======
   REQUIRED_BALANCE = 1
->>>>>>> 14th-march-ch14
 
   def initialize
     @balance = 0
@@ -24,8 +17,6 @@ class Oystercard
     @balance += amount
   end
 
-<<<<<<< HEAD
-=======
   def touch_in(entry_station)
     raise min_balance_message if @balance < REQUIRED_BALANCE
   
@@ -42,7 +33,6 @@ class Oystercard
     return true if @entry_station
   end
 
->>>>>>> 14th-march-ch14
   private
 
   def deduct(amount)
