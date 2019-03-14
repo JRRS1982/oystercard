@@ -28,37 +28,8 @@ describe Oystercard do
       )
     end
   end
-
-  describe '#in_journey' do
-    it 'returns false when first initialised' do
-      expect(subject).not_to be_in_journey
-    end
-  end
   
-  describe '#touch_in' do
-    it 'changes journey status' do
-      subject.top_up(90)
-      subject.touch_in(@entry_station)
-      expect(subject).to be_in_journey
-    end
 
-    # it 'records the entry station' do
-    #   subject.top_up(10)
-    #   subject.touch_in(@entry_station)
-    #   expect(subject.entry_station).to eq @entry_station
-    # end
-  
-    it 'raises an error when the balance is less than £1' do
-      expect { subject.touch_in(@entry_station) }.to raise_error "Sorry, your balance is too low to start this journey."
-    end
-
-    it 'records the entry station' do
-      subject.top_up(10)
-      subject.touch_in(@entry_station)
-      expect(subject.journeys[-1][:entry]).to eq @entry_station
-    end
-
-  end
 
   describe '#touch_out' do
     before :each do
