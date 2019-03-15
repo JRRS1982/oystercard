@@ -7,7 +7,7 @@ class Oystercard
 
   REQUIRED_BALANCE = 1
   PENALTY_FARE = 6
-  MINIMUM_FARE = 2
+  lasttrip = journeys[-1]
 
   def initialize
     @balance = 0
@@ -36,7 +36,7 @@ class Oystercard
       deduct(PENALTY_FARE)
     elsif journeys[-1].in_journey? == true
       journeys[-1].finish(exit_station)
-      deduct(MINIMUM_FARE)
+      deduct(journeys[-1].fare)
     end
   end
 
