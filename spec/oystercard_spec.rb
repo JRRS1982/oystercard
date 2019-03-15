@@ -42,7 +42,18 @@ describe Oystercard do
       penalty_fare = Oystercard::PENALTY_FARE
       expect { subject.touch_out(@exit_station) }.to change { subject.balance }.by(-penalty_fare)
     end
+  end
 
+  describe '#touch_in without touching_out' do
+    before :each do
+      subject.top_up(10)
+      subject.touch_in(@entry_station)
+    end
+    
+    it 'expects trouble if you check in twice' do
+      penalty_fare = Oystercard::PENALTY_FARE
+      expect { subject.touch_in(@entry_station) }.to change { subject.balance }.by(-penalty_fare)
+    end
   end
 
   describe '#touch_out' do

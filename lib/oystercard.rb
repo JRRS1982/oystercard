@@ -22,15 +22,19 @@ class Oystercard
 
   def touch_in(entry_station)
     raise min_balance_message if @balance < REQUIRED_BALANCE
+    if @journeys != []
+      deduct(PENALTY_FARE) if journeys[-1].in_journey? == true
+    end
     journey = Journey.new(entry_station)
-  
     @journeys << journey
   end
 
   def touch_out(exit_station)
-    @journeys.each do |trip|
-      if trip.in_journey?
-        trip.finish(exit_station)
+    if @journeys == []
+      deduct(PENALTY_FARE)
+    else
+      if journeys[-1].in_journey? == true
+        journeys[-1].finish(exit_station)
         deduct(MINIMUM_FARE)
       end
     end
