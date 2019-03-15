@@ -1,5 +1,3 @@
-require './lib/journey.rb'
-
 class Station
   attr_reader :station, :zone
 

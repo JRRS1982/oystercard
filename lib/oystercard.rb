@@ -1,4 +1,4 @@
-require_relative 'station'
+require './lib/station.rb'
 require './lib/journey.rb'
 
 class Oystercard
@@ -6,9 +6,12 @@ class Oystercard
   attr_reader :balance, :journeys
 
   REQUIRED_BALANCE = 1
+  PENALTY_FARE = 6
+  MINIMUM_FARE = 2
 
   def initialize
     @balance = 0
+    @journeys = []
   end
 
   def top_up(amount)
@@ -29,9 +32,6 @@ class Oystercard
     deduct(MINIMUM_FARE)
   end
 
-  def in_journey?
-    return true if @entry_station
-  end
 
   private
 

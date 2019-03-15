@@ -2,28 +2,36 @@ require './lib/station.rb'
 
 class Journey
 
-  PENTALTY = 10 
+  PENALTY_FARE = 6 
   MINIMUM_FARE = 2
 
   attr_reader :entry_station, :exit_station
 
   def initialize(entry_station)
-    @penalty_fare = PENTALTY
-    @entry_station = entry_station
     @exit_station = nil
-    @entry_zone = entry_zone
+    @entry_station = entry_station
   end 
 
-  def finish(exit_station, exit_zone)
+  def finish(exit_station)
     @exit_station = exit_station
-    @exit_zone = exit_zone
   end
 
-  def complete?
-    return true unless exit_station.nil?  
+  def journey_complete
+    !exit_station.nil? 
+  end
+
+  def in_journey?
+    @exit_station.nil? 
   end
 
   def fare
-    @fare = MINIMUM_FARE if complete? else PENTALTY
+    PENALTY_FARE unless complete? if complete? {
+      @fare - MINIMUM_FARE
+    }
+
+    # @fare = MINI MUM_FARE if complete? else PENTALTY
   end
+
+  def calculate_fare
+  end 
 end

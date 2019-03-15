@@ -1,4 +1,5 @@
-require 'Oystercard'
+require './lib/oystercard'
+
 describe Oystercard do
   before :each do
     @entry_station = double(:entry_station)
@@ -26,12 +27,6 @@ describe Oystercard do
   end
   
   describe '#touch_in' do
-    it 'changes journey status' do
-      subject.top_up(90)
-      subject.touch_in(@entry_station)
-      expect(subject).to be_in_journey
-    end
-  
     it 'raises an error when the balance is less than £1' do
       expect { subject.touch_in(@entry_station) }.to raise_error "Sorry, your balance is too low to start this journey."
     end
@@ -54,11 +49,6 @@ describe Oystercard do
       expect { subject.touch_out(@exit_station) }.to change { subject.balance }.by(-minimum_fare)
     end
 
-    it 'changes journey status' do
-      subject.touch_out(@exit_station)
-      expect(subject).not_to be_in_journey
-    end
-
     it 'records the exit station' do
       subject.touch_out(@exit_station)
       expect(subject.journeys[-1][:exit]).to eq @exit_station
@@ -70,12 +60,11 @@ describe Oystercard do
       expect(subject.journeys).to eq []
     end
 
-    it "returns an empty array at first" do  
+    it "registers one touch in and out as one journey" do  
       subject.top_up(10)
       subject.touch_in('Harringay')
       subject.touch_out('Liverpool Street')  
       expect(subject.journeys.count).to eq 1
     end
-
   end
 end
