@@ -32,11 +32,11 @@ class Oystercard
   def touch_out(exit_station)
     if @journeys == []
       deduct(PENALTY_FARE)
-    else
-      if journeys[-1].in_journey? == true
-        journeys[-1].finish(exit_station)
-        deduct(MINIMUM_FARE)
-      end
+    elsif journeys[-1].in_journey? == false
+      deduct(PENALTY_FARE)
+    elsif journeys[-1].in_journey? == true
+      journeys[-1].finish(exit_station)
+      deduct(MINIMUM_FARE)
     end
   end
 

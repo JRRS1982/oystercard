@@ -25,7 +25,6 @@ class Journey
   end
 
   def fare
-    # PENALTY_FARE unless { journey_complete? if journey_complete? MINIMUM_FARE }
     journey_complete? ? MINIMUM_FARE : PENALTY_FARE
   end
 
