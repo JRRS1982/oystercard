@@ -16,8 +16,8 @@ class Journey
     @exit_station = exit_station
   end
 
-  def journey_complete
-    !exit_station.nil? 
+  def journey_complete?
+    !exit_station.nil?
   end
 
   def in_journey?
@@ -25,11 +25,8 @@ class Journey
   end
 
   def fare
-    PENALTY_FARE unless complete? if complete? {
-      @fare - MINIMUM_FARE
-    }
-
-    # @fare = MINI MUM_FARE if complete? else PENTALTY
+    # PENALTY_FARE unless { journey_complete? if journey_complete? MINIMUM_FARE }
+    journey_complete? ? MINIMUM_FARE : PENALTY_FARE
   end
 
   def calculate_fare

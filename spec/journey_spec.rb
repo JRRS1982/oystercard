@@ -18,9 +18,13 @@ describe Journey do
   end
 
   context '#in journey?' do
-
-    it 'Expect journey to be true if no exit station' do
+    it 'Expect in_journey to be true if no exit station' do
       expect(subject.in_journey?).to eq true
+    end
+
+    it 'Expect journey_complete to return true after finish' do
+      subject.finish(station2)
+      expect(subject).to be_journey_complete
     end
   end
 
@@ -30,49 +34,19 @@ describe Journey do
       expect(subject.in_journey?).to eq false
     end
   end
+
+  context '#responds to a fare method' do
+    it { is_expected.to respond_to(:fare) }  
+  end
+
+  context 'returns a fare' do
+    it 'returns the minimum fare when we touch in and touch out' do
+      subject.finish(station2)
+      expect(subject.fare).to eq Journey::MINIMUM_FARE
+    end
+
+    it 'returns the minimum fare when we touch in and touch out' do
+      expect(subject.fare).to eq Journey::PENALTY_FARE
+    end
+  end
 end
-######################################################################################################
-
-
-#   let(:station) { double :station, zone: 1 }
-
-#   it "knows if a journey is not complete" do
-#     expect(subject).not_to be_complete
-#   end
-
-#   it 'has a penalty fare by default' do
-#     expect(subject.fare).to eq Journey::PENALTY_FARE
-#   end
-
-#   it "returns itself when exiting a journey" do
-#     expect(subject.finish(station)).to eq(subject)
-#   end
-
-#   context 'given an entry station' do
-#     subject { described_class.new(entry_station: station) }
-
-#     it 'has an entry station' do
-#       expect(subject.entry_station).to eq station
-#     end
-
-#     it "returns a penalty fare if no exit station given" do
-#       expect(subject.fare).to eq Journey::PENALTY_FARE
-#     end
-
-#     context 'given an exit station' do
-#       let(:other_station) { double :other_station }
-
-#       before do
-#         subject.finish(other_station)
-#       end
-
-#       it 'calculates a fare' do
-#         expect(subject.fare).to eq 1
-#       end
-
-#       it "knows if a journey is complete" do
-#         expect(subject).to be_complete
-#       end
-#     end
-#   end
-# end

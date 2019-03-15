@@ -22,16 +22,19 @@ class Oystercard
 
   def touch_in(entry_station)
     raise min_balance_message if @balance < REQUIRED_BALANCE
+    journey = Journey.new(entry_station)
   
-    @journeys << { :entry => entry_station }
+    @journeys << journey
   end
 
   def touch_out(exit_station)
-    @journeys[-1][:exit] = exit_station
-
-    deduct(MINIMUM_FARE)
+    @journeys.each do |trip|
+      if trip.in_journey?
+        trip.finish(exit_station)
+        deduct(MINIMUM_FARE)
+      end
+    end
   end
-
 
   private
 

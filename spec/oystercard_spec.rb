@@ -1,4 +1,5 @@
 require './lib/oystercard'
+require './lib/journey'
 
 describe Oystercard do
   before :each do
@@ -30,12 +31,18 @@ describe Oystercard do
     it 'raises an error when the balance is less than £1' do
       expect { subject.touch_in(@entry_station) }.to raise_error "Sorry, your balance is too low to start this journey."
     end
+  end
 
-    it 'records the entry station' do
+  describe '#touch_out without touch_in' do
+    before :each do 
       subject.top_up(10)
-      subject.touch_in(@entry_station)
-      expect(subject.journeys[-1][:entry]).to eq @entry_station
     end
+
+    it 'deducts' do
+      penalty_fare = Oystercard::PENALTY_FARE
+      expect { subject.touch_out(@exit_station) }.to change { subject.balance }.by(-penalty_fare)
+    end
+
   end
 
   describe '#touch_out' do
@@ -48,11 +55,6 @@ describe Oystercard do
       minimum_fare = described_class::MINIMUM_FARE
       expect { subject.touch_out(@exit_station) }.to change { subject.balance }.by(-minimum_fare)
     end
-
-    it 'records the exit station' do
-      subject.touch_out(@exit_station)
-      expect(subject.journeys[-1][:exit]).to eq @exit_station
-    end
   end
 
   describe '#journeys' do
@@ -62,9 +64,22 @@ describe Oystercard do
 
     it "registers one touch in and out as one journey" do  
       subject.top_up(10)
-      subject.touch_in('Harringay')
-      subject.touch_out('Liverpool Street')  
+      subject.touch_in(@entry_station)
+      subject.touch_out(@exit_station)  
       expect(subject.journeys.count).to eq 1
     end
+
+    it "Check the journey and see if includes completed journey" do  
+      subject.top_up(10)
+      subject.touch_in(@entry_station)
+      subject.touch_out(@exit_station)  
+      expect(subject.journeys[-1]).to be_a Journey
+    end
   end
+
+  # it 'returns a penalty fare if in journey and touch in' do
+  #   subject.
+  #   expect(subject.fare).to eq Journey::MINIMUM_FARE
+  # end
+
 end
