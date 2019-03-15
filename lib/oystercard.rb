@@ -7,7 +7,6 @@ class Oystercard
 
   REQUIRED_BALANCE = 1
   PENALTY_FARE = 6
-  lasttrip = journeys[-1]
 
   def initialize
     @balance = 0
@@ -22,6 +21,7 @@ class Oystercard
 
   def touch_in(entry_station)
     raise min_balance_message if @balance < REQUIRED_BALANCE
+
     if @journeys != []
       deduct(PENALTY_FARE) if journeys[-1].in_journey? == true
     end
@@ -30,7 +30,7 @@ class Oystercard
   end
 
   def touch_out(exit_station)
-    if @journeys == []
+    if @journeys == [] 
       deduct(PENALTY_FARE)
     elsif journeys[-1].in_journey? == false
       deduct(PENALTY_FARE)

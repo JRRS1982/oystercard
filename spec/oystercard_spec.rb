@@ -70,7 +70,7 @@ describe Oystercard do
     end
     
     it 'deducts the correct amount from my card for the journey' do
-      minimum_fare = described_class::MINIMUM_FARE
+      minimum_fare = Journey::MINIMUM_FARE
       expect { subject.touch_out(@exit_station) }.to change { subject.balance }.by(-minimum_fare)
     end
   end
